@@ -8,12 +8,17 @@
 int mergeSort ( std::vector<int>& nums, int& duration ) {
     if (nums.size() == 1) {
         return nums[0];
+    } else if (nums.size() == 0) {
+        return -1;
     }
 
     std::vector<int> l;
-    std::copy(nums.begin(), nums.begin() + (nums.size() / 2), l.begin());
+    for (int i = 0; i < nums.size() / 2; i++)
+        l.push_back(nums[i]);
+    
     std::vector<int> r;
-    std::copy(nums.begin() + (nums.size() / 2), nums.end(), r.begin());
+    for (int i = nums.size() / 2; i < nums.size(); i++)
+        r.push_back(nums[i]);
 
     int d = duration;
     mergeSort(l, d);
@@ -41,6 +46,5 @@ int mergeSort ( std::vector<int>& nums, int& duration ) {
         i += 1;
     }
 
-    return 1;
-    //return nums[ (nums.size() - (1 - nums.size() % 2) ) / 2 ];
+    return nums[ (nums.size() - (1 - nums.size() % 2) ) / 2 ];
 }

@@ -13,7 +13,7 @@
 
 int main() { 
 
-    std::vector<int> v = {2, 3, 4, 1, 5, 6};
+    std::vector<int> v = {2, 3, 4, 1, 5, 6, 7};
     int d = 10;
     std::cout << "Median" << mergeSort(v,d) << std::endl;
     
