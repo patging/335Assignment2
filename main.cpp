@@ -13,5 +13,10 @@
 
 int main() { 
 
+    std::vector<int> nums = { 2, 1, 3 , -100, 1002039, 100};
+    int d = 0;
+
+    std::cout << quickSelect(nums, d) << std::endl;
+
     return 0;
 }
