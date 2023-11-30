@@ -7,7 +7,7 @@ std::vector<int>::iterator hoarePartition ( std::vector<int>& nums, std::vector<
 
     // int pivot = *high;
 
-    std::vector<int>::iterator i = nums.begin() - 1;
+    std::vector<int>::iterator i = low - 1;
     std::vector<int>::iterator j = high + 1;
 
     while (true) {
@@ -28,7 +28,7 @@ std::vector<int>::iterator hoarePartition ( std::vector<int>& nums, std::vector<
 
 
         if (i >= j) {
-            return j;
+            return i;
         }
 
         std::iter_swap(i, j);
@@ -44,7 +44,7 @@ std::vector<int>::iterator medianOfThree(std::vector<int>::iterator a, std::vect
     // using XOR to say that if 
     // a number is greater than one or the other
     // then it assuredly is the median
-    if ( ((*a > *b) ^ (*a > *c)) || (*a == *c))
+    if ( ((*a > *b) ^ (*a > *c)) || (*a == *c) )
         return a;
     
     if ( ((*b > *a) ^ (*b > *c)) || (*b == *a) || (*b == *c) )
@@ -61,35 +61,53 @@ std::vector<int>::iterator medianOfThree(std::vector<int>::iterator a, std::vect
 */
 int quickSelect ( std::vector<int>& nums, int& duration ) {
 
-    std::vector<int>::iterator l = nums.begin();
-    std::vector<int>::iterator r = nums.end() - 1;
+    /*
+        to do rewrite this for recursive
+    */
 
-    std::vector<int>::iterator pivot; // im just going to encapsulate this.... :( 
+    int l = 0;
+    int r = nums.size() - 1;
 
-    while ( l < r ) {
+    std::vector<int>::iterator pivot = medianOfThree( nums.begin() + l ,nums.begin() + r); 
 
-        pivot = medianOfThree( l , r);
-        std::cout << "l : " << *l << " r " << *r << std::endl;
+    if (duration == (pivot - nums.begin())) {
+        return *pivot;
+    } else if ( duration < (pivot - nums.begin()) ) {
+        r = (pivot - nums.begin()) - 1;
+    } else {
+        l = (pivot - nums.begin()) + 1;
+    }    
 
-        // std::cout << *pivot << std::endl;
-        pivot = hoarePartition(nums, l, r, *pivot);
+    std::vector<int> num(nums.begin() + l, nums.begin() + r);
 
-        // debug print
-        for (int i = 0; i < nums.size(); i++) {
-            std::cout << nums[i] << " ";
-        }
-        std::cout << std::endl;
+    return quickSelect(num, duration);
+    // have to write this iteratively :(     
+
+    // while ( l < r ) {
+
+    //     pivot = medianOfThree( nums.begin() + l ,nums.begin() + r);
+    //     // std::cout << "l : " << l << " r " << r << std::endl;
+
+    //     // std::cout << *pivot << std::endl;
+    //     pivot = hoarePartition(nums, nums.begin() + l, nums.begin() + r, *pivot);
+
+    //     // debug print
+    //     // for (int i = 0; i < nums.size(); i++) {
+    //     //     std::cout << nums[i] << " ";
+    //     // }
+    //     // std::cout << *pivot << std::endl;
+    //     // std::cout << std::endl;
 
 
-        if (duration == (pivot - nums.begin())) {
-            return *pivot;
-        } else if ( duration < (pivot - nums.begin()) ) {
-            r = pivot - 1;
-        } else {
-            l = pivot + 1;
-        }
+    //     if (duration == (pivot - nums.begin())) {
+    //         return *pivot;
+    //     } else if ( duration < (pivot - nums.begin()) ) {
+    //         r = pivot - nums.begin() - 1;
+    //     } else {
+    //         l = pivot - nums.begin() + 1;
+    //     }
 
-    }
+    // }
 
-    return nums.at(*l); // meaning something went terribly wrong ( i can't think of why, but this is for the compiler tbh )
+    // return nums[l]; // meaning something went terribly wrong ( i can't think of why, but this is for the compiler tbh )
 }

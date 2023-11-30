@@ -9,5 +9,5 @@
 int standardSort ( std::vector<int>& nums, int& duration ) {
     std::sort(nums.begin(), nums.end());
 
-    return nums[ nums.size() / 2 ];
+    return nums[ (nums.size() - (1 - nums.size() % 2) ) / 2 ];
 }
