@@ -68,46 +68,35 @@ int quickSelect ( std::vector<int>& nums, int& duration ) {
     int l = 0;
     int r = nums.size() - 1;
 
-    std::vector<int>::iterator pivot = medianOfThree( nums.begin() + l ,nums.begin() + r); 
+    std::vector<int>::iterator pivot;
 
-    if (duration == (pivot - nums.begin())) {
-        return *pivot;
-    } else if ( duration < (pivot - nums.begin()) ) {
-        r = (pivot - nums.begin()) - 1;
-    } else {
-        l = (pivot - nums.begin()) + 1;
-    }    
-
-    std::vector<int> num(nums.begin() + l, nums.begin() + r);
-
-    return quickSelect(num, duration);
     // have to write this iteratively :(     
 
-    // while ( l < r ) {
+    while ( l < r ) {
 
-    //     pivot = medianOfThree( nums.begin() + l ,nums.begin() + r);
-    //     // std::cout << "l : " << l << " r " << r << std::endl;
+        pivot = medianOfThree( nums.begin() + l ,nums.begin() + r);
+        // std::cout << "l : " << l << " r " << r << std::endl;
 
-    //     // std::cout << *pivot << std::endl;
-    //     pivot = hoarePartition(nums, nums.begin() + l, nums.begin() + r, *pivot);
+        // std::cout << *pivot << std::endl;
+        pivot = hoarePartition(nums, nums.begin() + l, nums.begin() + r, *pivot);
 
-    //     // debug print
-    //     // for (int i = 0; i < nums.size(); i++) {
-    //     //     std::cout << nums[i] << " ";
-    //     // }
-    //     // std::cout << *pivot << std::endl;
-    //     // std::cout << std::endl;
+        // debug print
+        // for (int i = 0; i < nums.size(); i++) {
+        //     std::cout << nums[i] << " ";
+        // }
+        // std::cout << *pivot << std::endl;
+        // std::cout << std::endl;
 
 
-    //     if (duration == (pivot - nums.begin())) {
-    //         return *pivot;
-    //     } else if ( duration < (pivot - nums.begin()) ) {
-    //         r = pivot - nums.begin() - 1;
-    //     } else {
-    //         l = pivot - nums.begin() + 1;
-    //     }
+        if (duration == (pivot - nums.begin())) {
+            return *pivot;
+        } else if ( duration < (pivot - nums.begin()) ) {
+            r = pivot - nums.begin() - 1;
+        } else {
+            l = pivot - nums.begin() + 1;
+        }
 
-    // }
+    }
 
-    // return nums[l]; // meaning something went terribly wrong ( i can't think of why, but this is for the compiler tbh )
+    return nums[l]; // meaning something went terribly wrong ( i can't think of why, but this is for the compiler tbh )
 }
