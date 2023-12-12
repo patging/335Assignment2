@@ -1,3 +1,4 @@
+#pragma once
 #include <vector> 
 
 int quickSelect ( std::vector<int>& nums, int& duration );
