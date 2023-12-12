@@ -14,27 +14,27 @@
 
 int main() { 
 
-    // std::vector<int> nums = { 2, 1, 3 , -100, 1002039, 100};
-    // int d = 5;
-
+    std::vector<int> nums = { 2, 1, 3 , -100, 1002039, 100};
+    int d = 5;
+    halfSelectionSort(nums,d);
     // std::cout << quickSelect(nums, d) << std::endl;
 
-    std::vector<int> nums;
-    worstCaseQuickSelect(nums);
-    int duration = 7000;
+    // std::vector<int> nums;
+    // worstCaseQuickSelect(nums);
+    // int duration = 7000;
 
-    // for(int i = 0; i < 20000; i++) {
-    //     nums.push_back(i);
-    // }
+    // // for(int i = 0; i < 20000; i++) {
+    // //     nums.push_back(i);
+    // // }
 
-    auto start = std::chrono::steady_clock::now();
+    // auto start = std::chrono::steady_clock::now();
 
-    halfHeapSort(nums, duration);
+    // halfHeapSort(nums, duration);
 
-    auto end = std::chrono::steady_clock::now();
+    // auto end = std::chrono::steady_clock::now();
 
-    auto diff = end - start;
+    // auto diff = end - start;
 
-    std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count() << std::endl;
+    // std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(diff).count() << std::endl;
     return 0;
 }
